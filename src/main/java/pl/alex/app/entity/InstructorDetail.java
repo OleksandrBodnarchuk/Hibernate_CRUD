@@ -13,6 +13,8 @@ public class InstructorDetail {
     private String channel;
     @Column(name = "hobby")
     private String hobby;
+    @OneToOne(mappedBy = "detail",cascade = CascadeType.ALL) // by default - NO OPERATIONS ARE CASCADED !
+    private Instructor instructor;
 
     public InstructorDetail() {
 
@@ -47,6 +49,13 @@ public class InstructorDetail {
         this.hobby = hobby;
     }
 
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+    }
 
     @Override
     public String toString() {

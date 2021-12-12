@@ -15,18 +15,17 @@ public class Instructor {
     private String lastName;
     @Column(name = "email")
     private String email;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL) // by default - NO OPERATIONS ARE CASCADED !
     @JoinColumn(name = "instructor_detail_id")
     private InstructorDetail detail;
 
     public Instructor() {
     }
 
-    public Instructor(String firstName, String lastName, String email, InstructorDetail detail) {
+    public Instructor(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.detail = detail;
     }
 
     public int getId() {
@@ -67,5 +66,22 @@ public class Instructor {
 
     public void setDetail(InstructorDetail detail) {
         this.detail = detail;
+    }
+
+    public String shortInfo(){
+        return  " '" + firstName + '\'' +
+                " '" + lastName + '\'' +
+                " '" + email + '\'';
+    }
+
+    @Override
+    public String toString() {
+        return "Instructor{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", detail=" + detail +
+                '}';
     }
 }
