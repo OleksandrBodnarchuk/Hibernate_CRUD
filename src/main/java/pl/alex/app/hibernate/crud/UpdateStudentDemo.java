@@ -1,11 +1,11 @@
-package pl.alex.app.hibernate;
+package pl.alex.app.hibernate.crud;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import pl.alex.app.entity.Student;
 
-public class DeleteStudentDemo {
+public class UpdateStudentDemo {
     public static void main(String[] args) {
         // create session factory
         SessionFactory sessionFactory = new Configuration()
@@ -15,10 +15,16 @@ public class DeleteStudentDemo {
         Session session;
         try (sessionFactory) {
             session = sessionFactory.getCurrentSession(); // create session
-            int studentId = 2;
+            int studentId =4;
             session.beginTransaction();// begin transaction
-            session.createQuery("delete from Student where id="+studentId).executeUpdate();
+            Student myStudent = session.get(Student.class,studentId);
+            myStudent.setLastName("Buck");
             session.getTransaction().commit(); // commit transaction
+
+            session = sessionFactory.getCurrentSession();
+            session.beginTransaction();
+            session.createQuery("update Student set email='boob@gmail.com'").executeUpdate();
+            session.getTransaction().commit();
         }
     }
 }

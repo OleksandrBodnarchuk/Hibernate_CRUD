@@ -1,4 +1,4 @@
-package pl.alex.app.hibernate;
+package pl.alex.app.hibernate.crud;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
